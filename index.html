@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>Tiny Kingdom Defender</title>
+  <link rel="stylesheet" href="styles.css?v=3.0">
+</head>
+<body>
+  <div id="app">
+    <section id="menuScreen" class="screen menu-screen">
+      <div class="menu-panel">
+        <p class="eyebrow">Version 2</p>
+        <h1>Tiny Kingdom Defender</h1>
+        <p class="tagline">Build a tiny camp into a sturdy kingdom with soldiers, spells, and tougher boss waves.</p>
+
+        <div id="continueBox" class="continue-box hidden">
+          <button id="continueGame" class="primary-button">Continue Save</button>
+          <button id="resetSave" class="quiet-button">Reset Save</button>
+        </div>
+
+        <div class="difficulty-grid" aria-label="Difficulty selection">
+          <button class="difficulty-card" data-difficulty="easy">
+            <strong>Easy</strong>
+            <span>More gold, more castle health, gentler enemies.</span>
+          </button>
+          <button class="difficulty-card selected" data-difficulty="medium">
+            <strong>Medium</strong>
+            <span>Balanced gold, enemies, and rewards.</span>
+          </button>
+          <button class="difficulty-card" data-difficulty="hard">
+            <strong>Hard</strong>
+            <span>Less gold, stronger enemies, tighter rewards.</span>
+          </button>
+        </div>
+
+        <button id="newGame" class="start-button">New Game</button>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen hidden">
+      <header class="top-hud">
+        <div class="hud-pill version-pill">
+          <span class="hud-label">Build</span>
+          <strong>V2</strong>
+        </div>
+        <div class="hud-pill">
+          <span class="hud-label">Gold</span>
+          <strong id="goldText">0</strong>
+        </div>
+        <div class="hud-pill health-pill">
+          <span class="hud-label">Castle</span>
+          <div class="health-track" aria-hidden="true">
+            <div id="healthFill" class="health-fill"></div>
+          </div>
+          <strong id="castleHealthText">0 / 0</strong>
+        </div>
+        <div class="hud-pill">
+          <span class="hud-label">Wave</span>
+          <strong id="waveText">0 / 15</strong>
+        </div>
+        <div class="hud-actions">
+          <button id="pauseButton" class="icon-button">Pause</button>
+          <button id="restartButton" class="icon-button danger">Restart</button>
+        </div>
+      </header>
+
+      <main class="play-layout">
+        <div class="canvas-panel">
+          <canvas id="gameCanvas" width="960" height="640" aria-label="Tiny Kingdom Defender game board"></canvas>
+          <div id="toast" class="toast hidden"></div>
+          <div id="resultOverlay" class="result-overlay hidden">
+            <div class="result-panel">
+              <p id="resultEyebrow" class="eyebrow">Result</p>
+              <h2 id="resultTitle">Victory</h2>
+              <p id="resultBody">The kingdom stands.</p>
+              <button id="resultRestart" class="primary-button">Start Again</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side-panel">
+          <section class="panel-section">
+            <button id="startWaveButton" class="wave-button">Start Wave</button>
+            <div id="saveStatus" class="save-status">Ready</div>
+          </section>
+
+          <section class="panel-section">
+            <h2>Build</h2>
+            <div class="build-grid">
+              <button class="build-button" data-build="archer">
+                <span>Archer Tower</span>
+                <strong>80g</strong>
+              </button>
+              <button class="build-button" data-build="cannon">
+                <span>Cannon Tower</span>
+                <strong>120g</strong>
+              </button>
+              <button class="build-button" data-build="mage">
+                <span>Mage Tower</span>
+                <strong>140g</strong>
+              </button>
+              <button class="build-button" data-build="barracks">
+                <span>Barracks</span>
+                <strong>130g</strong>
+              </button>
+              <button class="build-button" data-build="farm">
+                <span>Farm</span>
+                <strong>100g</strong>
+              </button>
+              <button class="build-button" data-build="mine">
+                <span>Mine</span>
+                <strong>160g</strong>
+              </button>
+            </div>
+          </section>
+
+          <section class="panel-section spell-section">
+            <h2>Spells</h2>
+            <div class="spell-grid">
+              <button class="spell-button" data-spell="fireball">
+                <span>Fireball</span>
+                <strong>Ready</strong>
+              </button>
+              <button class="spell-button" data-spell="freeze">
+                <span>Freeze</span>
+                <strong>Ready</strong>
+              </button>
+              <button class="spell-button" data-spell="repair">
+                <span>Repair</span>
+                <strong>Ready</strong>
+              </button>
+            </div>
+            <button id="spellUpgradeButton" class="secondary-button">Upgrade Spell</button>
+          </section>
+
+          <section class="panel-section">
+            <h2>Selection</h2>
+            <div id="selectionDetails" class="selection-details">Choose a building type, then pick a matching spot on the map.</div>
+            <div id="contextActions" class="context-actions"></div>
+          </section>
+
+          <section class="panel-section kingdom-section">
+            <h2>Kingdom</h2>
+            <div id="kingdomDetails" class="selection-details">Camp Level 1</div>
+            <button id="castleUpgradeButton" class="secondary-button">Upgrade Castle</button>
+          </section>
+        </aside>
+      </main>
+    </section>
+  </div>
+
+  <script src="game.js?v=3.0"></script>
+</body>
+</html>
